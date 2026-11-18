@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300">
+  <g data-layer="fills" id="fills">
+    <path fill-rule="evenodd" data-face-id="b7-p08-left-00" data-dir="left" d="M 1047.24 1570.76 L 681.87 1359.82 L 681.50 1149.29 L 1046.87 1360.24 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-left-01" data-dir="left" d="M 316.50 1992.66 L 316.50 1570.76 L 681.87 1781.71 L 681.87 2203.60 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-left-02" data-dir="left" d="M 1046.87 1992.44 L 1047.24 1570.76 L 1411.88 1781.71 L 1411.88 1992.44 L 1776.88 2203.18 L 1776.88 2414.34 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-top-00" data-dir="top" d="M 1046.87 1360.24 L 681.50 1149.29 L 1138.12 885.66 L 1503.49 1096.61 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-top-01" data-dir="top" d="M 1411.88 1781.71 L 1047.24 1570.76 L 1503.13 1307.13 L 1868.50 1518.08 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-top-02" data-dir="top" d="M 681.87 1781.71 L 316.50 1570.76 L 681.87 1359.82 L 1047.24 1570.76 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-top-03" data-dir="top" d="M 1776.88 2203.18 L 1411.88 1992.44 L 1868.13 1728.60 L 2233.50 1939.55 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-right-00" data-dir="right" d="M 1047.24 1570.76 L 1046.87 1360.24 L 1503.49 1096.61 L 1503.13 1307.13 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-right-01" data-dir="right" d="M 1411.88 1992.44 L 1411.88 1781.71 L 1868.50 1518.08 L 1868.13 1728.60 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-right-02" data-dir="right" d="M 681.87 2203.60 L 681.87 1781.71 L 1047.24 1570.76 L 1046.87 1992.44 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b7-p08-right-03" data-dir="right" d="M 2233.50 2150.71 L 1776.88 2414.34 L 1776.88 2203.18 L 2233.50 1939.55 Z" fill="#fff" stroke="none" />
+  </g>
+  <g data-layer="paint" id="paint-layer" />
+  <g data-layer="lines" pointer-events="none" stroke-width="10" stroke-miterlimit="3" id="line-art" fill="none" stroke="#000">
+    <path d="M 1776.88 2414.34 L 2233.50 2150.71 L 2233.50 1939.55" />
+    <path d="M 1776.88 2414.34 L 1776.88 2203.18" />
+    <path d="M 1776.88 2414.34 L 1046.87 1992.44" />
+    <path d="M 2233.50 1939.55 L 1776.88 2203.18" />
+    <path d="M 2233.50 1939.55 L 1868.13 1728.60" />
+    <path d="M 1776.88 2203.18 L 1411.88 1992.44" />
+    <path d="M 1046.87 1992.44 L 681.87 2203.60" />
+    <path d="M 1046.87 1992.44 L 1047.24 1570.76" />
+    <path d="M 1868.13 1728.60 L 1411.88 1992.44" />
+    <path d="M 1868.13 1728.60 L 1868.50 1518.08" />
+    <path d="M 1411.88 1992.44 L 1411.88 1781.71" />
+    <path d="M 1411.88 1781.71 L 1868.50 1518.08" />
+    <path d="M 1411.88 1781.71 L 1047.24 1570.76" />
+    <path d="M 1868.50 1518.08 L 1503.13 1307.13" />
+    <path d="M 1503.13 1307.13 L 1503.49 1096.61" />
+    <path d="M 1503.13 1307.13 L 1047.24 1570.76" />
+    <path d="M 1047.24 1570.76 L 1046.87 1360.24" />
+    <path d="M 1047.24 1570.76 L 681.87 1781.71" />
+    <path d="M 1047.24 1570.76 L 681.87 1359.82" />
+    <path d="M 1503.49 1096.61 L 1046.87 1360.24" />
+    <path d="M 1503.49 1096.61 L 1138.12 885.66 L 681.50 1149.29" />
+    <path d="M 1046.87 1360.24 L 681.50 1149.29" />
+    <path d="M 681.50 1149.29 L 681.87 1359.82" />
+    <path d="M 681.87 1359.82 L 316.50 1570.76" />
+    <path d="M 681.87 2203.60 L 681.87 1781.71" />
+    <path d="M 681.87 2203.60 L 316.50 1992.66 L 316.50 1570.76" />
+    <path d="M 681.87 1781.71 L 316.50 1570.76" />
+    <g class="left-seams" stroke="#fff" stroke-width="9.5" id="seams" display="none" />
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300">
+  <g data-layer="fills" id="fills">
+    <path fill-rule="evenodd" data-face-id="b4-p32-left-00" data-dir="left" d="M 316.50 1692.20 L 316.50 1181.86 L 611.83 1352.43 L 611.83 1521.69 L 611.83 1862.71 L 611.83 2033.56 L 611.83 2203.39 L 611.83 2884.41 L 316.50 2713.90 L 316.50 1863.05 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-left-01" data-dir="left" d="M 1348.69 2288.13 L 1348.52 2458.80 L 1053.94 2288.82 L 906.57 2203.73 L 906.57 2032.88 L 1201.90 2203.39 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-left-02" data-dir="left" d="M 906.57 2373.90 L 906.57 2203.73 L 1053.94 2288.82 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-00" data-dir="top" d="M 611.83 1352.43 L 316.50 1181.86 L 463.87 1096.61 L 759.20 926.10 L 1643.43 415.59 L 1938.76 586.10 L 1348.98 926.61 L 1054.53 1096.61 L 759.20 1267.12 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-01" data-dir="top" d="M 463.87 1096.61 L 316.50 1011.53 L 611.83 841.02 L 759.20 926.10 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-02" data-dir="top" d="M 1644.02 1436.95 L 1349.08 1266.89 L 1644.02 1096.61 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-03" data-dir="top" d="M 1348.69 1607.46 L 1053.94 1437.29 L 1349.08 1266.89 L 1644.02 1436.95 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-04" data-dir="top" d="M 1349.13 1777.54 L 906.77 1522.71 L 1053.94 1437.29 L 1348.69 1607.46 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-05" data-dir="top" d="M 1644.02 1947.46 L 1349.13 1777.54 L 1644.02 1607.80 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-top-06" data-dir="top" d="M 1201.90 2203.39 L 906.57 2032.88 L 906.77 1522.71 L 1349.13 1777.54 L 1644.02 1947.46 L 1791.39 2032.54 L 1348.69 2288.13 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-right-00" data-dir="right" d="M 2233.50 926.44 L 1938.17 1096.95 L 1938.56 756.16 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-right-01" data-dir="right" d="M 316.50 1181.86 L 316.50 1011.53 L 463.87 1096.61 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-right-02" data-dir="right" d="M 1644.02 1607.80 L 1349.13 1777.54 L 1348.69 1607.46 L 1644.02 1436.95 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-right-03" data-dir="right" d="M 611.83 1521.69 L 611.83 1352.43 L 759.20 1267.12 L 1054.53 1096.61 L 1348.98 926.61 L 1938.76 586.10 L 1938.56 756.16 L 1938.17 1096.95 L 2233.50 926.44 L 2233.50 1948.14 L 1938.17 2117.97 L 1791.39 2202.99 L 1791.39 2032.54 L 1644.02 1947.46 L 1644.02 1607.80 L 1644.02 1436.95 L 1644.02 1096.61 L 1349.08 1266.89 L 1053.94 1437.29 L 906.77 1522.71 L 906.57 2032.88 L 906.57 2203.73 L 906.57 2373.90 L 1053.94 2288.82 L 1348.52 2458.80 L 611.83 2884.41 L 611.83 2203.39 L 611.83 2033.56 L 611.83 1862.71 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p32-right-04" data-dir="right" d="M 1791.39 2202.99 L 1348.52 2458.80 L 1348.69 2288.13 L 1791.39 2032.54 Z" fill="#fff" stroke="none" />
+  </g>
+  <g data-layer="paint" id="paint-layer" />
+  <g data-layer="lines" pointer-events="none" stroke-width="10" stroke-miterlimit="3" id="line-art" fill="none" stroke="#000">
+    <path d="M 611.83 2884.41 L 316.50 2713.90 L 316.50 1863.05 L 316.50 1692.20 L 316.50 1181.86" />
+    <path d="M 611.83 2884.41 L 611.83 2203.39 L 611.83 2033.56 L 611.83 1862.71 L 611.83 1521.69 L 611.83 1352.43" />
+    <path d="M 611.83 2884.41 L 1348.52 2458.80" />
+    <path d="M 316.50 1181.86 L 611.83 1352.43" />
+    <path d="M 316.50 1181.86 L 463.87 1096.61" />
+    <path d="M 316.50 1181.86 L 316.50 1011.53" />
+    <path d="M 611.83 1352.43 L 759.20 1267.12 L 1054.53 1096.61 L 1348.98 926.61 L 1938.76 586.10" />
+    <path d="M 1348.52 2458.80 L 1053.94 2288.82" />
+    <path d="M 1348.52 2458.80 L 1348.69 2288.13" />
+    <path d="M 1348.52 2458.80 L 1791.39 2202.99" />
+    <path d="M 1938.76 586.10 L 1643.43 415.59 L 759.20 926.10" />
+    <path d="M 1938.76 586.10 L 1938.56 756.16" />
+    <path d="M 463.87 1096.61 L 759.20 926.10" />
+    <path d="M 463.87 1096.61 L 316.50 1011.53" />
+    <path d="M 316.50 1011.53 L 611.83 841.02 L 759.20 926.10" />
+    <path d="M 1938.56 756.16 L 2233.50 926.44" />
+    <path d="M 1938.56 756.16 L 1938.17 1096.95 L 2233.50 926.44" />
+    <path d="M 1644.02 1947.46 L 1644.02 1607.80" />
+    <path d="M 1644.02 1947.46 L 1791.39 2032.54" />
+    <path d="M 1644.02 1947.46 L 1349.13 1777.54" />
+    <path d="M 1644.02 1607.80 L 1644.02 1436.95" />
+    <path d="M 1644.02 1607.80 L 1349.13 1777.54" />
+    <path d="M 1791.39 2032.54 L 1348.69 2288.13" />
+    <path d="M 1791.39 2032.54 L 1791.39 2202.99" />
+    <path d="M 1349.13 1777.54 L 906.77 1522.71" />
+    <path d="M 1349.13 1777.54 L 1348.69 1607.46" />
+    <path d="M 1644.02 1436.95 L 1644.02 1096.61 L 1349.08 1266.89" />
+    <path d="M 1644.02 1436.95 L 1349.08 1266.89" />
+    <path d="M 1644.02 1436.95 L 1348.69 1607.46" />
+    <path d="M 1349.08 1266.89 L 1053.94 1437.29" />
+    <path d="M 1348.69 1607.46 L 1053.94 1437.29" />
+    <path d="M 1053.94 2288.82 L 906.57 2373.90 L 906.57 2203.73" />
+    <path d="M 1053.94 2288.82 L 906.57 2203.73" />
+    <path d="M 906.57 2203.73 L 906.57 2032.88" />
+    <path d="M 906.77 1522.71 L 906.57 2032.88" />
+    <path d="M 906.77 1522.71 L 1053.94 1437.29" />
+    <path d="M 906.57 2032.88 L 1201.90 2203.39 L 1348.69 2288.13" />
+    <path d="M 1791.39 2202.99 L 1938.17 2117.97 L 2233.50 1948.14 L 2233.50 926.44" />
+    <g class="left-seams" stroke="#fff" stroke-width="9.5" id="seams" display="none">
+      <path d="M 906.57 2203.73 L 1053.94 2288.82" />
+    </g>
+  </g>
+</svg>

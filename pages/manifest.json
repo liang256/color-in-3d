@@ -1,0 +1,52 @@
+[
+  {
+    "id": "b4-p34",
+    "title": "Title-page slab",
+    "svg": "b4-p34.svg",
+    "faceCounts": {
+      "left": 5,
+      "top": 5,
+      "right": 5
+    }
+  },
+  {
+    "id": "b4-p32",
+    "title": "Batch 4 \u00b7 Page 32",
+    "svg": "b4-p32.svg",
+    "faceCounts": {
+      "left": 3,
+      "top": 7,
+      "right": 5
+    }
+  },
+  {
+    "id": "b4-p01",
+    "title": "Batch 4 \u00b7 Page 01",
+    "svg": "b4-p01.svg",
+    "faceCounts": {
+      "left": 5,
+      "top": 5,
+      "right": 3
+    }
+  },
+  {
+    "id": "b7-p08",
+    "title": "Batch 7 \u00b7 Page 08",
+    "svg": "b7-p08.svg",
+    "faceCounts": {
+      "left": 3,
+      "top": 4,
+      "right": 4
+    }
+  },
+  {
+    "id": "b7-p24",
+    "title": "Batch 7 \u00b7 Page 24",
+    "svg": "b7-p24.svg",
+    "faceCounts": {
+      "left": 3,
+      "top": 4,
+      "right": 3
+    }
+  }
+]

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFF6E8">
+  <title>Color in 3D Together · Coloring demo</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="demo.js"></script>
+</head>
+<body>
+  <main class="layout">
+    <header>
+      <h1>Color in 3D Together</h1>
+    </header>
+    <aside class="controls" aria-label="Coloring controls">
+      <label class="section-title" for="page">Coloring page</label>
+      <select id="page" disabled></select>
+
+      <fieldset class="modes" id="modes">
+        <legend class="section-title">View mode</legend>
+        <button type="button" data-mode="one-side" aria-pressed="true">One side only</button>
+        <button type="button" data-mode="paladin" aria-pressed="false">Paladin</button>
+        <button type="button" data-mode="mage" aria-pressed="false">Mage</button>
+        <button type="button" data-mode="random" aria-pressed="false">Random palette</button>
+        <button type="button" data-mode="tap" aria-pressed="false">Tap-to-fill</button>
+      </fieldset>
+      <p id="mode-help"></p>
+      <button type="button" id="shuffle" hidden>Shuffle</button>
+
+      <fieldset class="palette">
+        <legend class="section-title">Palette A</legend>
+        <div id="swatches"></div>
+      </fieldset>
+    </aside>
+
+    <figure class="sheet">
+      <figcaption><span id="page-title"></span><span id="face-count"></span></figcaption>
+      <div id="stage" aria-label="Coloring artwork"></div>
+      <p id="status" role="status">Loading artwork…</p>
+    </figure>
+  </main>
+</body>
+</html>

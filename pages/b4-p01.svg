@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300">
+  <g data-layer="fills" id="fills">
+    <path fill-rule="evenodd" data-face-id="b4-p01-left-00" data-dir="left" d="M 1082.89 1280.97 L 955.16 1207.43 L 955.16 1059.74 L 1082.89 1133.48 L 1338.48 1280.90 L 1338.36 1428.47 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-left-01" data-dir="left" d="M 828.45 1722.86 L 828.45 1575.96 L 955.16 1649.70 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-left-02" data-dir="left" d="M 1466.60 1650.00 L 955.16 1649.70 L 955.16 1354.72 L 1210.62 1502.21 L 1338.36 1575.96 L 1338.36 1428.47 L 1338.48 1280.90 L 1466.09 1354.72 L 1722.06 1502.51 L 1722.06 2388.05 L 1466.60 2240.56 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-left-03" data-dir="left" d="M 316.50 1871.53 L 316.50 1575.96 L 572.47 1723.75 L 572.47 2019.32 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-left-04" data-dir="left" d="M 699.70 2092.77 L 699.70 1945.87 L 699.70 1797.20 L 828.45 1797.27 L 955.16 1797.34 L 1211.13 1797.49 L 1211.13 2388.05 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-top-00" data-dir="top" d="M 1082.89 1133.48 L 955.16 1059.74 L 1211.13 911.95 L 1466.60 1059.44 L 1594.33 1133.19 L 1466.60 1206.93 L 1338.48 1280.90 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-top-01" data-dir="top" d="M 1466.09 1354.72 L 1338.48 1280.90 L 1466.60 1206.93 L 1594.33 1133.19 L 1849.79 985.70 L 2233.50 1207.23 L 1722.06 1502.51 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-top-02" data-dir="top" d="M 955.16 1354.72 L 1082.89 1280.97 L 1338.36 1428.47 L 1338.36 1575.96 L 1210.62 1502.21 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-top-03" data-dir="top" d="M 572.47 1723.75 L 316.50 1575.96 L 955.16 1207.43 L 1082.89 1280.97 L 955.16 1354.72 L 955.16 1649.70 L 828.45 1575.96 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-top-04" data-dir="top" d="M 828.45 1797.27 L 699.70 1797.20 L 828.45 1722.86 L 955.16 1649.70 L 1466.60 1650.00 L 1211.13 1797.49 L 955.16 1797.34 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-right-00" data-dir="right" d="M 572.47 2019.32 L 572.47 1723.75 L 828.45 1575.96 L 828.45 1722.86 L 699.70 1797.20 L 699.70 1945.87 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-right-01" data-dir="right" d="M 1722.06 2388.05 L 1722.06 1502.51 L 2233.50 1207.23 L 2233.50 2092.77 Z" fill="#fff" stroke="none" />
+    <path fill-rule="evenodd" data-face-id="b4-p01-right-02" data-dir="right" d="M 1466.60 2240.56 L 1211.13 2388.05 L 1211.13 1797.49 L 1466.60 1650.00 Z" fill="#fff" stroke="none" />
+  </g>
+  <g data-layer="paint" id="paint-layer" />
+  <g data-layer="lines" pointer-events="none" stroke-width="10" stroke-miterlimit="3" id="line-art" fill="none" stroke="#000">
+    <path d="M 955.16 1354.72 L 955.16 1649.70" />
+    <path d="M 955.16 1354.72 L 1082.89 1280.97" />
+    <path d="M 955.16 1354.72 L 1210.62 1502.21 L 1338.36 1575.96 L 1338.36 1428.47" />
+    <path d="M 955.16 1649.70 L 828.45 1722.86" />
+    <path d="M 955.16 1649.70 L 828.45 1575.96" />
+    <path d="M 955.16 1649.70 L 1466.60 1650.00" />
+    <path d="M 1082.89 1280.97 L 1338.36 1428.47" />
+    <path d="M 1082.89 1280.97 L 955.16 1207.43" />
+    <path d="M 1338.36 1428.47 L 1338.48 1280.90" />
+    <path d="M 828.45 1722.86 L 699.70 1797.20" />
+    <path d="M 828.45 1722.86 L 828.45 1575.96" />
+    <path d="M 828.45 1575.96 L 572.47 1723.75" />
+    <path d="M 1466.60 1650.00 L 1466.60 2240.56" />
+    <path d="M 1466.60 1650.00 L 1211.13 1797.49" />
+    <path d="M 955.16 1207.43 L 955.16 1059.74" />
+    <path d="M 955.16 1207.43 L 316.50 1575.96" />
+    <path d="M 1466.60 1059.44 L 1594.33 1133.19" />
+    <path d="M 1466.60 1059.44 L 1211.13 911.95 L 955.16 1059.74" />
+    <path d="M 1466.60 1059.44 L 1594.33 1133.19" />
+    <path d="M 1594.33 1133.19 L 1466.60 1206.93 L 1338.48 1280.90" />
+    <path d="M 1594.33 1133.19 L 1849.79 985.70 L 2233.50 1207.23" />
+    <path d="M 955.16 1059.74 L 1082.89 1133.48 L 1338.48 1280.90" />
+    <path d="M 1338.48 1280.90 L 1466.09 1354.72 L 1722.06 1502.51" />
+    <path d="M 2233.50 1207.23 L 2233.50 2092.77 L 1722.06 2388.05" />
+    <path d="M 2233.50 1207.23 L 1722.06 1502.51" />
+    <path d="M 1722.06 1502.51 L 1722.06 2388.05" />
+    <path d="M 1722.06 2388.05 L 1466.60 2240.56" />
+    <path d="M 1466.60 2240.56 L 1211.13 2388.05" />
+    <path d="M 1211.13 2388.05 L 699.70 2092.77 L 699.70 1945.87" />
+    <path d="M 1211.13 2388.05 L 1211.13 1797.49" />
+    <path d="M 1211.13 1797.49 L 955.16 1797.34 L 828.45 1797.27 L 699.70 1797.20" />
+    <path d="M 316.50 1575.96 L 316.50 1871.53 L 572.47 2019.32" />
+    <path d="M 316.50 1575.96 L 572.47 1723.75" />
+    <path d="M 699.70 1945.87 L 699.70 1797.20" />
+    <path d="M 699.70 1945.87 L 572.47 2019.32" />
+    <path d="M 572.47 2019.32 L 572.47 1723.75" />
+    <g class="left-seams" stroke="#fff" stroke-width="9.5" id="seams" display="none">
+      <path d="M 1338.36 1428.47 L 1338.48 1280.90" />
+    </g>
+  </g>
+</svg>
