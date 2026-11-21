@@ -119,6 +119,65 @@
             <div id="stage" aria-label="Coloring artwork"></div>
             <p id="status" role="status">Loading artwork…</p>
           </figure>
+
+          <div class="mobile-play" id="mobile-play">
+            <div class="play-row">
+              <button type="button" class="pager" id="page-prev" aria-label="Previous page" title="Previous page" disabled>‹</button>
+              <p class="page-label" id="page-label" aria-live="polite">
+                <span id="page-label-name"></span>
+                <span id="page-label-count"></span>
+              </p>
+              <button type="button" class="pager" id="page-next" aria-label="Next page" title="Next page" disabled>›</button>
+            </div>
+            <div class="mode-icons" role="group" aria-label="View mode">
+              <button type="button" data-mode="one-side" aria-pressed="true" aria-label="One side only" title="One side only">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3.2 20.5 8 12 12.8 3.5 8 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                  <path d="M3.5 8 12 12.8V20.8L3.5 16V8Z" fill="currentColor"/>
+                  <path d="M20.5 8 12 12.8V20.8L20.5 16V8Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button type="button" data-mode="paladin" aria-pressed="false" aria-label="One color per side" title="One color per side">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3.2 20.5 8 12 12.8 3.5 8 12 3.2Z" fill="#FFC400" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                  <path d="M3.5 8 12 12.8V20.8L3.5 16V8Z" fill="#00A99A" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                  <path d="M20.5 8 12 12.8V20.8L20.5 16V8Z" fill="#F94C3E" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button type="button" data-mode="mage" aria-pressed="false" aria-label="One color per face" title="One color per face">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3.2 12 12.8 3.5 8 12 3.2Z" fill="#FFC400"/>
+                  <path d="M12 3.2 20.5 8 12 12.8 12 3.2Z" fill="#E07700"/>
+                  <path d="M3.5 8 12 12.8 12 16.2 3.5 12.2V8Z" fill="#2A56E8"/>
+                  <path d="M3.5 12.2 12 16.2V20.8L3.5 16V12.2Z" fill="#1A2FA8"/>
+                  <path d="M20.5 8 12 12.8 12 16.2 20.5 12.2V8Z" fill="#F94C3E"/>
+                  <path d="M20.5 12.2 12 16.2V20.8L20.5 16V12.2Z" fill="#00A99A"/>
+                  <path d="M12 3.2 20.5 8 12 12.8 3.5 8 12 3.2ZM3.5 8 12 12.8V20.8L3.5 16V8ZM20.5 8 12 12.8V20.8L20.5 16V8Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button type="button" data-mode="random" aria-pressed="false" aria-label="Random colors" title="Random colors">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3.5" y="3.5" width="17" height="17" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="8.2" cy="8.2" r="1.35" fill="currentColor"/>
+                  <circle cx="15.8" cy="8.2" r="1.35" fill="currentColor"/>
+                  <circle cx="12" cy="12" r="1.35" fill="currentColor"/>
+                  <circle cx="8.2" cy="15.8" r="1.35" fill="currentColor"/>
+                  <circle cx="15.8" cy="15.8" r="1.35" fill="currentColor"/>
+                </svg>
+              </button>
+              <button type="button" data-mode="tap" aria-pressed="false" aria-label="Tap to fill" title="Tap to fill">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 9.5c.2-2.6 1.7-4.4 4-5.5 2.2 1.2 3.6 3 3.8 5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M4.8 11h14.4l-1.6 8.2a1.8 1.8 0 0 1-1.8 1.4H8.2a1.8 1.8 0 0 1-1.8-1.4L4.8 11Z" fill="currentColor"/>
+                  <path d="M4.2 11h15.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="play-meta">
+              <p class="mode-caption" id="mode-caption" aria-hidden="true"></p>
+              <div id="mobile-swatches" class="mobile-swatches"></div>
+            </div>
+          </div>
         </div>
         <noscript><p>The coloring page needs JavaScript. The rest of this page works without it.</p></noscript>
       </div>

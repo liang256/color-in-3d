@@ -18,8 +18,17 @@ const stage = document.querySelector("#stage");
 const pageSelect = document.querySelector("#page");
 const modeButtons = document.querySelectorAll("[data-mode]");
 const swatches = document.querySelector("#swatches");
+const mobileSwatches = document.querySelector("#mobile-swatches");
+const mobilePlay = document.querySelector("#mobile-play");
 const shuffle = document.querySelector("#shuffle");
 const status = document.querySelector("#status");
+const modeNames = {
+  "one-side": "One side only",
+  paladin: "One color per side",
+  mage: "One color per face",
+  random: "Random colors",
+  tap: "Tap to fill",
+};
 
 const faceColors = new Map();
 let faces = [];
@@ -27,6 +36,7 @@ let seed = 34;
 let selectedColor = colors[0];
 let activeMode = "one-side";
 let requestId = 0;
+let ignoreClick = false;
 
 function seededRandom(start) {
   let state = start;
@@ -106,8 +116,10 @@ function setMode(name, initialFills = "") {
   for (const button of modeButtons) {
     button.setAttribute("aria-pressed", String(button.dataset.mode === name));
   }
-  for (const input of swatches.querySelectorAll("input")) input.disabled = !interactive;
+  for (const input of document.querySelectorAll('input[name="color"]')) input.disabled = !interactive;
   document.querySelector("#mode-help").textContent = mode.help;
+  document.querySelector("#mode-caption").textContent = modeNames[name];
+  mobilePlay.classList.toggle("is-tap", name === "tap");
   shuffle.hidden = name !== "random";
   renderColors();
 }
@@ -128,11 +140,24 @@ for (const [name, color] of palette) {
   swatches.append(label);
 }
 
-swatches.addEventListener("change", event => {
-  selectedColor = event.target.value;
+const swatchNodes = [...swatches.children];
+const compactQuery = window.matchMedia("(max-width: 640px)");
+function placeSwatches() {
+  (compactQuery.matches ? mobileSwatches : swatches).append(...swatchNodes);
+}
+placeSwatches();
+compactQuery.addEventListener("change", placeSwatches);
+
+document.addEventListener("change", event => {
+  if (event.target.name === "color") selectedColor = event.target.value;
 });
 for (const button of modeButtons) {
   button.addEventListener("click", () => {
+    if (button.dataset.mode === "random" && activeMode === "random") {
+      seed += 1;
+      setMode("random");
+      return;
+    }
     if (activeMode !== button.dataset.mode) setMode(button.dataset.mode);
   });
 }
@@ -140,7 +165,29 @@ shuffle.addEventListener("click", () => {
   seed += 1;
   setMode("random");
 });
-stage.addEventListener("click", event => modes[activeMode].activate?.(event));
+stage.addEventListener("click", event => {
+  if (ignoreClick) {
+    ignoreClick = false;
+    return;
+  }
+  modes[activeMode].activate?.(event);
+});
+
+let swipeStart = null;
+stage.addEventListener("touchstart", event => {
+  if (event.touches.length !== 1) return;
+  swipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+}, { passive: true });
+stage.addEventListener("touchend", event => {
+  if (!swipeStart) return;
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - swipeStart.x;
+  const dy = touch.clientY - swipeStart.y;
+  swipeStart = null;
+  if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+  ignoreClick = true;
+  stepPage(dx < 0 ? 1 : -1);
+});
 stage.addEventListener("keydown", event => {
   if (!modes[activeMode].activate || !["Enter", " "].includes(event.key)) return;
   if (!event.target.closest("[data-face-id]")) return;
@@ -168,6 +215,7 @@ async function loadPage(page, initialFills) {
     document.querySelector("#page-title").textContent = page.title;
     document.querySelector("#face-count").textContent = `${faces.length} faces`;
     pageSelect.value = page.id;
+    updatePageLabel();
     setMode(activeMode, initialFills);
     status.hidden = true;
   } catch (error) {
@@ -192,9 +240,33 @@ async function init() {
     pageSelect.addEventListener("change", () => {
       loadPage(pages.find(page => page.id === pageSelect.value));
     });
+    for (const id of ["page-prev", "page-next"]) document.querySelector(`#${id}`).disabled = false;
+    document.querySelector("#page-prev").addEventListener("click", () => stepPage(-1));
+    document.querySelector("#page-next").addEventListener("click", () => stepPage(1));
   } catch (error) {
     status.textContent = error.message;
   }
+}
+
+function updatePageLabel() {
+  const options = [...pageSelect.options];
+  const index = options.findIndex(option => option.value === pageSelect.value);
+  const name = document.querySelector("#page-label-name");
+  const count = document.querySelector("#page-label-count");
+  if (!name || !count) return;
+  name.textContent = index >= 0 ? options[index].textContent : "";
+  count.textContent = index >= 0 ? `${index + 1}/${options.length}` : "";
+  const label = document.querySelector("#page-label");
+  if (label && index >= 0) label.title = `${options[index].textContent} ${index + 1}/${options.length}`;
+}
+
+function stepPage(delta) {
+  const options = [...pageSelect.options];
+  if (!options.length || pageSelect.disabled) return;
+  const index = options.findIndex(option => option.value === pageSelect.value);
+  const next = (index + delta + options.length) % options.length;
+  pageSelect.value = options[next].value;
+  pageSelect.dispatchEvent(new Event("change"));
 }
 
 init();
