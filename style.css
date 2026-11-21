@@ -340,6 +340,27 @@ select { width: 100%; }
 .swatch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .chip { display: block; width: 24px; height: 24px; border: 1px solid #16181733; border-radius: 50%; background: var(--swatch); }
 .swatch:has(input:enabled:checked) .chip { outline: 2px solid var(--ink); outline-offset: 2px; }
+.swatch-add { cursor: pointer; }
+.color-picker {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.add-chip {
+  display: grid;
+  place-items: center;
+  background: conic-gradient(#f94c3e, #ffc400, #2ed3c2, #2a56e8, #e07700, #f94c3e);
+  color: #161817;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+.swatch-add:has(input:disabled) { opacity: 0.4; }
 
 .sheet { margin: 0 auto; width: min(100%, 600px, 63vh); }
 figcaption, .sheet figcaption {
@@ -482,19 +503,23 @@ figcaption, .sheet figcaption {
   .mobile-play.is-tap .mode-caption { display: none; }
   .mobile-play.is-tap .mobile-swatches {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 2px;
+    gap: 0;
     width: 100%;
+    max-width: 100%;
   }
   .mobile-swatches .swatch {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 40px;
+    flex: 0 0 36px;
     margin: 0;
     padding: 0;
     justify-content: center;
     font-size: 0;
     gap: 0;
   }
-  .mobile-swatches .chip { width: 26px; height: 26px; }
+  .mobile-swatches .chip { width: 24px; height: 24px; }
+  .mobile-swatches .add-chip { font-size: 16px; }
 }

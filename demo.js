@@ -116,7 +116,9 @@ function setMode(name, initialFills = "") {
   for (const button of modeButtons) {
     button.setAttribute("aria-pressed", String(button.dataset.mode === name));
   }
-  for (const input of document.querySelectorAll('input[name="color"]')) input.disabled = !interactive;
+  for (const input of document.querySelectorAll('input[name="color"], .color-picker')) {
+    input.disabled = !interactive;
+  }
   document.querySelector("#mode-help").textContent = mode.help;
   document.querySelector("#mode-caption").textContent = modeNames[name];
   mobilePlay.classList.toggle("is-tap", name === "tap");
@@ -124,7 +126,18 @@ function setMode(name, initialFills = "") {
   renderColors();
 }
 
-for (const [name, color] of palette) {
+const customColorKey = "color-in-3d-custom-colors";
+const maxCustomColors = 5;
+const presetNodes = [];
+let customNodes = [];
+
+function normalizeHex(value) {
+  if (typeof value !== "string") return "";
+  const hex = value.trim().toLowerCase();
+  return /^#[0-9a-f]{6}$/.test(hex) ? hex : "";
+}
+
+function makeSwatch(name, color) {
   const label = document.createElement("label");
   label.className = "swatch";
   label.style.setProperty("--swatch", color);
@@ -132,20 +145,95 @@ for (const [name, color] of palette) {
   input.type = "radio";
   input.name = "color";
   input.value = color;
-  input.checked = color === selectedColor;
+  input.checked = color.toLowerCase() === selectedColor.toLowerCase();
   input.disabled = true;
   const chip = document.createElement("span");
   chip.className = "chip";
-  label.append(input, chip, name);
-  swatches.append(label);
+  const text = document.createElement("span");
+  text.className = "swatch-name";
+  text.textContent = name;
+  label.append(input, chip, text);
+  return label;
 }
 
-const swatchNodes = [...swatches.children];
+for (const [name, color] of palette) presetNodes.push(makeSwatch(name, color));
+
+const addSwatch = document.createElement("label");
+addSwatch.className = "swatch swatch-add";
+const colorPicker = document.createElement("input");
+colorPicker.type = "color";
+colorPicker.className = "color-picker";
+colorPicker.value = colors[0];
+colorPicker.setAttribute("aria-label", "Choose a color");
+colorPicker.title = "Choose a color";
+const addChip = document.createElement("span");
+addChip.className = "chip add-chip";
+addChip.textContent = "+";
+addChip.setAttribute("aria-hidden", "true");
+const addName = document.createElement("span");
+addName.className = "swatch-name";
+addName.textContent = "Custom";
+addSwatch.append(colorPicker, addChip, addName);
+
+function readCustomColors() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(customColorKey) || "[]");
+    if (!Array.isArray(parsed)) return [];
+    const presets = new Set(colors.map(color => color.toLowerCase()));
+    const unique = [];
+    for (const item of parsed) {
+      const hex = normalizeHex(item);
+      if (!hex || presets.has(hex) || unique.includes(hex)) continue;
+      unique.push(hex);
+    }
+    return unique.slice(-maxCustomColors);
+  } catch {
+    return [];
+  }
+}
+
+function writeCustomColors(list) {
+  localStorage.setItem(customColorKey, JSON.stringify(list));
+}
+
 const compactQuery = window.matchMedia("(max-width: 640px)");
 function placeSwatches() {
-  (compactQuery.matches ? mobileSwatches : swatches).append(...swatchNodes);
+  const host = compactQuery.matches ? mobileSwatches : swatches;
+  host.append(...presetNodes, ...customNodes, addSwatch);
 }
-placeSwatches();
+function renderCustomSwatches(list) {
+  for (const node of customNodes) node.remove();
+  customNodes = list.map(hex => makeSwatch(hex.toUpperCase(), hex));
+  placeSwatches();
+  const interactive = Boolean(modes[activeMode].activate);
+  for (const input of document.querySelectorAll('input[name="color"], .color-picker')) {
+    input.disabled = !interactive;
+  }
+}
+function selectSwatch(hex) {
+  selectedColor = hex;
+  for (const input of document.querySelectorAll('input[name="color"]')) {
+    input.checked = input.value.toLowerCase() === hex.toLowerCase();
+  }
+}
+function addCustomColor(value) {
+  const hex = normalizeHex(value);
+  if (!hex) return;
+  const preset = colors.find(color => color.toLowerCase() === hex);
+  if (preset) {
+    selectSwatch(preset);
+    return;
+  }
+  const list = readCustomColors().filter(color => color !== hex);
+  list.push(hex);
+  const kept = list.slice(-maxCustomColors);
+  writeCustomColors(kept);
+  renderCustomSwatches(kept);
+  selectSwatch(hex);
+}
+
+colorPicker.addEventListener("change", () => addCustomColor(colorPicker.value));
+renderCustomSwatches(readCustomColors());
 compactQuery.addEventListener("change", placeSwatches);
 
 document.addEventListener("change", event => {
