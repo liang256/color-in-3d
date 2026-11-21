@@ -512,17 +512,17 @@ figcaption, .sheet figcaption {
   .mobile-play.is-tap .mode-caption { display: none; }
   .mobile-play.is-tap .mobile-swatches {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    gap: 0;
+    gap: 2px;
     width: 100%;
     max-width: 100%;
   }
   .mobile-swatches .swatch {
-    width: 36px;
+    width: 40px;
     height: 40px;
-    flex: 0 0 36px;
+    flex: 0 0 40px;
     margin: 0;
     padding: 0;
     justify-content: center;

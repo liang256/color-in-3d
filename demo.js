@@ -126,15 +126,19 @@ function setMode(name, initialFills = "") {
   renderColors();
 }
 
-const customColorKey = "color-in-3d-custom-colors";
-const maxCustomColors = 5;
-const presetNodes = [];
-let customNodes = [];
+const swatchRowKey = "color-in-3d-swatch-row";
+const swatchCount = 7;
+let swatchNodes = [];
 
 function normalizeHex(value) {
   if (typeof value !== "string") return "";
   const hex = value.trim().toLowerCase();
   return /^#[0-9a-f]{6}$/.test(hex) ? hex : "";
+}
+
+function swatchName(hex) {
+  const preset = palette.find(([, color]) => color.toLowerCase() === hex);
+  return preset ? preset[0] : hex.toUpperCase();
 }
 
 function makeSwatch(name, color) {
@@ -156,8 +160,6 @@ function makeSwatch(name, color) {
   return label;
 }
 
-for (const [name, color] of palette) presetNodes.push(makeSwatch(name, color));
-
 const addSwatch = document.createElement("label");
 addSwatch.className = "swatch swatch-add";
 const colorPicker = document.createElement("input");
@@ -175,65 +177,69 @@ addName.className = "swatch-name";
 addName.textContent = "Custom";
 addSwatch.append(colorPicker, addChip, addName);
 
-function readCustomColors() {
+function defaultSwatchRow() {
+  return colors.map(color => color.toLowerCase());
+}
+
+function readSwatchRow() {
   try {
-    const parsed = JSON.parse(localStorage.getItem(customColorKey) || "[]");
-    if (!Array.isArray(parsed)) return [];
-    const presets = new Set(colors.map(color => color.toLowerCase()));
-    const unique = [];
-    for (const item of parsed) {
-      const hex = normalizeHex(item);
-      if (!hex || presets.has(hex) || unique.includes(hex)) continue;
-      unique.push(hex);
-    }
-    return unique.slice(-maxCustomColors);
+    const parsed = JSON.parse(localStorage.getItem(swatchRowKey) || "null");
+    if (!Array.isArray(parsed) || parsed.length !== swatchCount) return defaultSwatchRow();
+    const row = parsed.map(normalizeHex);
+    if (row.some(color => !color) || new Set(row).size !== row.length) return defaultSwatchRow();
+    return row;
   } catch {
-    return [];
+    return defaultSwatchRow();
   }
 }
 
-function writeCustomColors(list) {
-  localStorage.setItem(customColorKey, JSON.stringify(list));
+function writeSwatchRow(row) {
+  localStorage.setItem(swatchRowKey, JSON.stringify(row));
 }
 
 const compactQuery = window.matchMedia("(max-width: 640px)");
 function placeSwatches() {
   const host = compactQuery.matches ? mobileSwatches : swatches;
-  host.append(...presetNodes, ...customNodes, addSwatch);
+  host.append(...swatchNodes, addSwatch);
 }
-function renderCustomSwatches(list) {
-  for (const node of customNodes) node.remove();
-  customNodes = list.map(hex => makeSwatch(hex.toUpperCase(), hex));
+function renderSwatchRow(row) {
+  for (const node of swatchNodes) node.remove();
+  swatchNodes = row.map(hex => makeSwatch(swatchName(hex), hex));
   placeSwatches();
   const interactive = Boolean(modes[activeMode].activate);
   for (const input of document.querySelectorAll('input[name="color"], .color-picker')) {
     input.disabled = !interactive;
   }
 }
+function currentRow() {
+  return swatchNodes.map(node => node.querySelector("input").value.toLowerCase());
+}
 function selectSwatch(hex) {
   selectedColor = hex;
+  let matched = false;
   for (const input of document.querySelectorAll('input[name="color"]')) {
-    input.checked = input.value.toLowerCase() === hex.toLowerCase();
+    const isMatch = !matched && input.value.toLowerCase() === hex;
+    input.checked = isMatch;
+    if (isMatch) matched = true;
   }
 }
-function addCustomColor(value) {
+function chooseColor(value) {
   const hex = normalizeHex(value);
   if (!hex) return;
-  const preset = colors.find(color => color.toLowerCase() === hex);
-  if (preset) {
-    selectSwatch(preset);
+  const row = currentRow();
+  if (row.includes(hex)) {
+    selectSwatch(hex);
     return;
   }
-  const list = readCustomColors().filter(color => color !== hex);
-  list.push(hex);
-  const kept = list.slice(-maxCustomColors);
-  writeCustomColors(kept);
-  renderCustomSwatches(kept);
+  const next = [hex, ...row.slice(0, swatchCount - 1)];
+  writeSwatchRow(next);
+  renderSwatchRow(next);
   selectSwatch(hex);
 }
 
-colorPicker.addEventListener("change", () => addCustomColor(colorPicker.value));
-renderCustomSwatches(readCustomColors());
+colorPicker.addEventListener("change", () => chooseColor(colorPicker.value));
+renderSwatchRow(readSwatchRow());
+selectSwatch(currentRow()[0]);
 compactQuery.addEventListener("change", placeSwatches);
 
 document.addEventListener("change", event => {
