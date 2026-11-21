@@ -3,42 +3,288 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Color in 3D Together | Geometric Coloring Book</title>
+  <meta name="description" content="Color in 3D Together is an isometric coloring book for kids 6+ and adults. 80 pages, 8.5×11 in, paperback $9.99. Try a page in the browser, then buy it on Amazon.">
+  <link rel="canonical" href="https://liang256.github.io/color-in-3d/">
   <meta name="theme-color" content="#FFF6E8">
-  <title>Color in 3D Together · Coloring demo</title>
+  <meta property="og:type" content="book">
+  <meta property="og:site_name" content="Color in 3D Together">
+  <meta property="og:title" content="Color in 3D Together">
+  <meta property="og:description" content="Geometric shapes coloring book for kids and adults. Relaxing 3D designs, ages 6+. Paperback $9.99. Try a page before you buy.">
+  <meta property="og:url" content="https://liang256.github.io/color-in-3d/">
+  <meta property="og:image" content="https://liang256.github.io/color-in-3d/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Color in 3D Together, a geometric coloring book. Paperback $9.99. Isometric blocks in coral, blue, teal, and yellow.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Color in 3D Together">
+  <meta name="twitter:description" content="Geometric shapes coloring book for kids and adults. Relaxing 3D designs, ages 6+. Paperback $9.99. Try a page before you buy.">
+  <meta name="twitter:image" content="https://liang256.github.io/color-in-3d/assets/og.jpg">
+  <meta name="twitter:image:alt" content="Color in 3D Together, a geometric coloring book. Paperback $9.99. Isometric blocks in coral, blue, teal, and yellow.">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preload" as="image" href="assets/cover.webp" type="image/webp">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Color in 3D Together",
+    "alternateName": "一起塗立體",
+    "author": { "@type": "Person", "name": "Cold Sun" },
+    "bookFormat": "https://schema.org/Paperback",
+    "inLanguage": "en",
+    "numberOfPages": 80,
+    "isbn": "9798143990401",
+    "description": "Geometric Shapes Coloring Book for Kids and Adults. Relaxing 3D Designs, Ages 6+.",
+    "image": "https://liang256.github.io/color-in-3d/assets/cover.jpg",
+    "url": "https://liang256.github.io/color-in-3d/",
+    "publisher": "Independently published",
+    "offers": {
+      "@type": "Offer",
+      "price": "9.99",
+      "priceCurrency": "USD",
+      "url": "https://www.amazon.com/dp/B0HSJ2X2YC"
+    }
+  }
+  </script>
   <script type="module" src="demo.js"></script>
 </head>
 <body>
-  <main class="layout">
-    <header>
-      <h1>Color in 3D Together</h1>
-    </header>
-    <aside class="controls" aria-label="Coloring controls">
-      <label class="section-title" for="page">Coloring page</label>
-      <select id="page" disabled></select>
+  <a class="skip" href="#try">Skip to the coloring page</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="wordmark" href="#top">
+        <span class="wordmark-full">Color in 3D Together</span>
+        <span class="wordmark-short">Color in 3D</span>
+      </a>
+      <a class="buy buy-compact" href="https://www.amazon.com/dp/B0HSJ2X2YC">Buy on Amazon</a>
+    </div>
+  </header>
 
-      <fieldset class="modes" id="modes">
-        <legend class="section-title">View mode</legend>
-        <button type="button" data-mode="one-side" aria-pressed="true">One side only</button>
-        <button type="button" data-mode="paladin" aria-pressed="false">One color per side</button>
-        <button type="button" data-mode="mage" aria-pressed="false">One color per face</button>
-        <button type="button" data-mode="random" aria-pressed="false">Random colors</button>
-        <button type="button" data-mode="tap" aria-pressed="false">Tap to fill</button>
-      </fieldset>
-      <p id="mode-help"></p>
-      <button type="button" id="shuffle" hidden>Shuffle</button>
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Paperback</p>
+        <h1>Color in 3D<br>Together</h1>
+        <p class="zh" lang="zh-Hant">一起塗立體</p>
+        <p class="subtitle">Geometric Shapes Coloring Book for Kids and Adults<br>Relaxing 3D Designs, Ages 6+</p>
+      </div>
+      <div class="hero-buy">
+        <p class="price"><span class="price-amount">$9.99</span> <span class="price-note">paperback</span></p>
+        <div class="hero-actions">
+          <a class="buy" href="https://www.amazon.com/dp/B0HSJ2X2YC">Buy on Amazon</a>
+          <a class="textlink" href="#try">Try a page first</a>
+        </div>
+        <p class="tagline">Find your calm, one block at a time.</p>
+        <p class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span></p>
+        <p class="byline">By Cold Sun · 80 pages · 8.5 × 11 in</p>
+      </div>
+      <figure class="cover">
+        <picture>
+          <source srcset="assets/cover.webp" type="image/webp">
+          <img src="assets/cover.jpg" width="1100" height="1424" alt="Cover of Color in 3D Together by Cold Sun. Isometric blocks in coral, blue, teal, yellow, and orange on a cream background. The line at the bottom reads: Find your calm, one block at a time." fetchpriority="high">
+        </picture>
+      </figure>
+    </section>
 
-      <fieldset class="palette">
-        <legend class="section-title">Palette A</legend>
-        <div id="swatches"></div>
-      </fieldset>
-    </aside>
+    <section class="block" id="try">
+      <div class="wrap">
+        <div class="block-head">
+          <p class="eyebrow">Try a page before you buy</p>
+          <h2>Color a drawing here first</h2>
+          <p class="lede">Five isometric drawings, in the browser. Use one side only, one color per side, one color per face, random colors, or tap to fill. Nothing is saved, and nothing is sent anywhere.</p>
+        </div>
+        <div class="layout">
+          <aside class="controls" aria-label="Coloring controls">
+            <label class="section-title" for="page">Coloring page</label>
+            <select id="page" disabled></select>
 
-    <figure class="sheet">
-      <figcaption><span id="page-title"></span><span id="face-count"></span></figcaption>
-      <div id="stage" aria-label="Coloring artwork"></div>
-      <p id="status" role="status">Loading artwork…</p>
-    </figure>
+            <fieldset class="modes" id="modes">
+              <legend class="section-title">View mode</legend>
+              <button type="button" data-mode="one-side" aria-pressed="true">One side only</button>
+              <button type="button" data-mode="paladin" aria-pressed="false">One color per side</button>
+              <button type="button" data-mode="mage" aria-pressed="false">One color per face</button>
+              <button type="button" data-mode="random" aria-pressed="false">Random colors</button>
+              <button type="button" data-mode="tap" aria-pressed="false">Tap to fill</button>
+            </fieldset>
+            <p id="mode-help"></p>
+            <button type="button" id="shuffle" hidden>Shuffle</button>
+
+            <fieldset class="palette">
+              <legend class="section-title">Palette A</legend>
+              <div id="swatches"></div>
+            </fieldset>
+          </aside>
+
+          <figure class="sheet">
+            <figcaption><span id="page-title"></span><span id="face-count"></span></figcaption>
+            <div id="stage" aria-label="Coloring artwork"></div>
+            <p id="status" role="status">Loading artwork…</p>
+          </figure>
+        </div>
+        <noscript><p>The coloring page needs JavaScript. The rest of this page works without it.</p></noscript>
+      </div>
+    </section>
+
+    <section class="block" id="inside">
+      <div class="wrap">
+        <div class="block-head">
+          <p class="eyebrow">The book</p>
+          <h2>What’s inside</h2>
+        </div>
+        <ul class="stats">
+          <li><strong>80</strong> pages</li>
+          <li><strong>8.5 × 11</strong> inches</li>
+          <li><strong>32</strong> coloring pages</li>
+          <li><strong>$9.99</strong> paperback</li>
+        </ul>
+        <div class="copy-grid">
+          <p>Thirty-two of the pages are isometric coloring pages. Each of those drawings is followed by a blank page.</p>
+          <p>It opens by asking you to color one stack with no rules. Then it names seven ways to color, and offers the One Rule Challenge: pick one rule and use it for the whole book.</p>
+          <p>A page before the drawings asks you to test the paper. If color comes through, keep a spare sheet behind the page. The art is drawn for colored pencils, gel pens, and fine markers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="colorers">
+      <div class="wrap">
+        <div class="block-head">
+          <p class="eyebrow">What your colors say</p>
+          <h2>Which Colorer Are You?</h2>
+          <p class="lede">Find the one that feels like what you just did. Or the one you want to try. Color the stack however you feel. No wrong answers.</p>
+        </div>
+        <ol class="types">
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">A</span> The Sage</h3>
+              <p>Leaves it uncolored. Sees a thousand possibilities. Feels no need to choose one.</p>
+            </div>
+          </li>
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">B</span> The Dark Mage</h3>
+              <p>Fills the entire silhouette with black. Swallows every face, every line, and even the third dimension.</p>
+            </div>
+          </li>
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">C</span> The Iaido Master</h3>
+              <p>Colors only the faces on the same side. Every stroke has a purpose. Not one more than necessary.</p>
+            </div>
+          </li>
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">D</span> The Paladin</h3>
+              <p>One tone for each direction. Light, mid, and dark. Graphic, yet spacious. Protects every side and leaves nothing overlooked.</p>
+            </div>
+          </li>
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">E</span> The Mage</h3>
+              <p>Gives every face a different tone or pattern. No two faces alike. No spell cast the same way twice. (Ah, I can’t show the colors, but you can see them, right? After all, you’re a mage.)</p>
+            </div>
+          </li>
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">F</span> The Happy Bee</h3>
+              <p>Others see a box. You see yourself, a cute little bee-ing.</p>
+            </div>
+          </li>
+          <li>
+            <img class="type-icon" src="assets/stack.svg" alt="" width="308" height="301" loading="lazy">
+            <div>
+              <h3><span class="letter">G</span> ???</h3>
+              <p>None of the above. You are free to be anything :)</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block" id="samples">
+      <div class="wrap">
+        <div class="block-head">
+          <p class="eyebrow">The pages</p>
+          <h2>A few to look at</h2>
+          <p class="lede">Each coloring page has a short line at the foot. These four are from the book.</p>
+        </div>
+        <div class="gallery">
+          <figure>
+            <img src="assets/page-relative.webp" width="900" height="1075" alt="Four isometric line drawings of geometric blocks and frames." loading="lazy" decoding="async">
+            <figcaption>Everything is relative.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/page-cube.webp" width="900" height="1098" alt="Four isometric line drawings, including a tall wedge and an open frame." loading="lazy" decoding="async">
+            <figcaption>There’s no wrong side of a cube.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/page-light.webp" width="900" height="1124" alt="Four isometric line drawings of slabs, stairs, and an open frame." loading="lazy" decoding="async">
+            <figcaption>Light comes from wherever you decide.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/page-quiet.webp" width="900" height="1095" alt="Four isometric line drawings of steps, slabs, and a leaning plane." loading="lazy" decoding="async">
+            <figcaption>Stop when the page feels quiet.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="for">
+      <div class="wrap">
+        <div class="block-head">
+          <p class="eyebrow">Who it’s for</p>
+          <h2>Kids, adults, and anyone looking at space</h2>
+        </div>
+        <div class="cards">
+          <article>
+            <h3>Kids 6+</h3>
+            <p>A coloring page and a visual puzzle: which face comes forward, and which sits back. It is also a book you can sit down and color together.</p>
+          </article>
+          <article>
+            <h3>Adults who want to relax</h3>
+            <p>Orderly shapes, one block at a time. A quiet way to unwind, with the pencil doing the work.</p>
+          </article>
+          <article>
+            <h3>Building spatial skills</h3>
+            <p>A color on one face changes the whole form. Seeing that happen is practice in reading a flat drawing as a solid.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="print">
+      <div class="wrap print-card">
+        <img class="print-thumb" src="assets/page-relative.webp" width="900" height="1075" alt="" loading="lazy" decoding="async">
+        <div>
+          <p class="eyebrow">Free, no email</p>
+          <h2>Print one page</h2>
+          <p class="lede">“Everything is relative.” One coloring page from the book, at 8.5 × 11 inches. No form, no account, no tracking.</p>
+          <a class="ghost" href="sample/everything-is-relative.pdf" download="color-in-3d-together-sample.pdf">Download the page (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block closer" id="buy">
+      <div class="wrap closer-inner">
+        <p class="tagline">Find your calm, one block at a time.</p>
+        <p class="price"><span class="price-amount">$9.99</span> <span class="price-note">paperback</span></p>
+        <a class="buy" href="https://www.amazon.com/dp/B0HSJ2X2YC">Buy on Amazon</a>
+        <p class="byline">80 pages · 8.5 × 11 in · Ages 6+</p>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Color in 3D Together · by Cold Sun</p>
+      <p>Independently published · English · ISBN 979-8143990401</p>
+    </div>
+  </footer>
 </body>
 </html>
