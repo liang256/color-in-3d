@@ -18,8 +18,17 @@ const stage = document.querySelector("#stage");
 const pageSelect = document.querySelector("#page");
 const modeButtons = document.querySelectorAll("[data-mode]");
 const swatches = document.querySelector("#swatches");
+const mobileSwatches = document.querySelector("#mobile-swatches");
+const mobilePlay = document.querySelector("#mobile-play");
 const shuffle = document.querySelector("#shuffle");
 const status = document.querySelector("#status");
+const modeNames = {
+  "one-side": "One side only",
+  paladin: "One color per side",
+  mage: "One color per face",
+  random: "Random colors",
+  tap: "Tap to fill",
+};
 
 const faceColors = new Map();
 let faces = [];
@@ -27,6 +36,7 @@ let seed = 34;
 let selectedColor = colors[0];
 let activeMode = "one-side";
 let requestId = 0;
+let ignoreClick = false;
 
 function seededRandom(start) {
   let state = start;
@@ -63,6 +73,7 @@ const modes = {
       if (!face || !stage.contains(face)) return;
       faceColors.set(face.dataset.faceId, selectedColor);
       renderColors();
+      face.blur();
     },
   },
 };
@@ -106,13 +117,32 @@ function setMode(name, initialFills = "") {
   for (const button of modeButtons) {
     button.setAttribute("aria-pressed", String(button.dataset.mode === name));
   }
-  for (const input of swatches.querySelectorAll("input")) input.disabled = !interactive;
+  for (const input of document.querySelectorAll('input[name="color"], .color-picker')) {
+    input.disabled = !interactive;
+  }
   document.querySelector("#mode-help").textContent = mode.help;
+  mobilePlay.classList.toggle("is-tap", name === "tap");
+  updatePageLabel();
   shuffle.hidden = name !== "random";
   renderColors();
 }
 
-for (const [name, color] of palette) {
+const swatchRowKey = "color-in-3d-swatch-row";
+const swatchCount = 7;
+let swatchNodes = [];
+
+function normalizeHex(value) {
+  if (typeof value !== "string") return "";
+  const hex = value.trim().toLowerCase();
+  return /^#[0-9a-f]{6}$/.test(hex) ? hex : "";
+}
+
+function swatchName(hex) {
+  const preset = palette.find(([, color]) => color.toLowerCase() === hex);
+  return preset ? preset[0] : hex.toUpperCase();
+}
+
+function makeSwatch(name, color) {
   const label = document.createElement("label");
   label.className = "swatch";
   label.style.setProperty("--swatch", color);
@@ -120,19 +150,109 @@ for (const [name, color] of palette) {
   input.type = "radio";
   input.name = "color";
   input.value = color;
-  input.checked = color === selectedColor;
+  input.checked = color.toLowerCase() === selectedColor.toLowerCase();
   input.disabled = true;
   const chip = document.createElement("span");
   chip.className = "chip";
-  label.append(input, chip, name);
-  swatches.append(label);
+  const text = document.createElement("span");
+  text.className = "swatch-name";
+  text.textContent = name;
+  label.append(input, chip, text);
+  return label;
 }
 
-swatches.addEventListener("change", event => {
-  selectedColor = event.target.value;
+const addSwatch = document.createElement("label");
+addSwatch.className = "swatch swatch-add";
+const colorPicker = document.createElement("input");
+colorPicker.type = "color";
+colorPicker.className = "color-picker";
+colorPicker.value = colors[0];
+colorPicker.setAttribute("aria-label", "Choose a color");
+colorPicker.title = "Choose a color";
+const addChip = document.createElement("span");
+addChip.className = "chip add-chip";
+addChip.textContent = "+";
+addChip.setAttribute("aria-hidden", "true");
+const addName = document.createElement("span");
+addName.className = "swatch-name";
+addName.textContent = "Custom";
+addSwatch.append(colorPicker, addChip, addName);
+
+function defaultSwatchRow() {
+  return colors.map(color => color.toLowerCase());
+}
+
+function readSwatchRow() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(swatchRowKey) || "null");
+    if (!Array.isArray(parsed) || parsed.length !== swatchCount) return defaultSwatchRow();
+    const row = parsed.map(normalizeHex);
+    if (row.some(color => !color) || new Set(row).size !== row.length) return defaultSwatchRow();
+    return row;
+  } catch {
+    return defaultSwatchRow();
+  }
+}
+
+function writeSwatchRow(row) {
+  localStorage.setItem(swatchRowKey, JSON.stringify(row));
+}
+
+const compactQuery = window.matchMedia("(max-width: 640px)");
+function placeSwatches() {
+  const host = compactQuery.matches ? mobileSwatches : swatches;
+  host.append(...swatchNodes, addSwatch);
+}
+function renderSwatchRow(row) {
+  for (const node of swatchNodes) node.remove();
+  swatchNodes = row.map(hex => makeSwatch(swatchName(hex), hex));
+  placeSwatches();
+  const interactive = Boolean(modes[activeMode].activate);
+  for (const input of document.querySelectorAll('input[name="color"], .color-picker')) {
+    input.disabled = !interactive;
+  }
+}
+function currentRow() {
+  return swatchNodes.map(node => node.querySelector("input").value.toLowerCase());
+}
+function selectSwatch(hex) {
+  selectedColor = hex;
+  let matched = false;
+  for (const input of document.querySelectorAll('input[name="color"]')) {
+    const isMatch = !matched && input.value.toLowerCase() === hex;
+    input.checked = isMatch;
+    if (isMatch) matched = true;
+  }
+}
+function chooseColor(value) {
+  const hex = normalizeHex(value);
+  if (!hex) return;
+  const row = currentRow();
+  if (row.includes(hex)) {
+    selectSwatch(hex);
+    return;
+  }
+  const next = [hex, ...row.slice(0, swatchCount - 1)];
+  writeSwatchRow(next);
+  renderSwatchRow(next);
+  selectSwatch(hex);
+}
+
+colorPicker.addEventListener("change", () => chooseColor(colorPicker.value));
+renderSwatchRow(readSwatchRow());
+selectSwatch(currentRow()[0]);
+compactQuery.addEventListener("change", placeSwatches);
+
+document.addEventListener("change", event => {
+  if (event.target.name === "color") selectedColor = event.target.value;
 });
 for (const button of modeButtons) {
   button.addEventListener("click", () => {
+    if (button.dataset.mode === "random" && activeMode === "random") {
+      seed += 1;
+      setMode("random");
+      return;
+    }
     if (activeMode !== button.dataset.mode) setMode(button.dataset.mode);
   });
 }
@@ -140,7 +260,29 @@ shuffle.addEventListener("click", () => {
   seed += 1;
   setMode("random");
 });
-stage.addEventListener("click", event => modes[activeMode].activate?.(event));
+stage.addEventListener("click", event => {
+  if (ignoreClick) {
+    ignoreClick = false;
+    return;
+  }
+  modes[activeMode].activate?.(event);
+});
+
+let swipeStart = null;
+stage.addEventListener("touchstart", event => {
+  if (event.touches.length !== 1) return;
+  swipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+}, { passive: true });
+stage.addEventListener("touchend", event => {
+  if (!swipeStart) return;
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - swipeStart.x;
+  const dy = touch.clientY - swipeStart.y;
+  swipeStart = null;
+  if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+  ignoreClick = true;
+  stepPage(dx < 0 ? 1 : -1);
+});
 stage.addEventListener("keydown", event => {
   if (!modes[activeMode].activate || !["Enter", " "].includes(event.key)) return;
   if (!event.target.closest("[data-face-id]")) return;
@@ -164,10 +306,12 @@ async function loadPage(page, initialFills) {
     if (svg.localName !== "svg") throw new Error(`Invalid artwork in ${page.svg}`);
     svg.setAttribute("aria-label", page.title);
     stage.replaceChildren(svg);
+    fitArtwork(svg);
     faces = [...svg.querySelectorAll("[data-face-id]")];
     document.querySelector("#page-title").textContent = page.title;
     document.querySelector("#face-count").textContent = `${faces.length} faces`;
     pageSelect.value = page.id;
+    updatePageLabel();
     setMode(activeMode, initialFills);
     status.hidden = true;
   } catch (error) {
@@ -192,9 +336,59 @@ async function init() {
     pageSelect.addEventListener("change", () => {
       loadPage(pages.find(page => page.id === pageSelect.value));
     });
+    for (const id of ["page-prev", "page-next"]) document.querySelector(`#${id}`).disabled = false;
+    document.querySelector("#page-prev").addEventListener("click", () => stepPage(-1));
+    document.querySelector("#page-next").addEventListener("click", () => stepPage(1));
   } catch (error) {
     status.textContent = error.message;
   }
+}
+
+function fitArtwork(svg) {
+  const nodes = [...svg.querySelectorAll("#fills, #line-art, #seams")];
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const node of nodes) {
+    const box = node.getBBox();
+    if (!box.width && !box.height) continue;
+    minX = Math.min(minX, box.x);
+    minY = Math.min(minY, box.y);
+    maxX = Math.max(maxX, box.x + box.width);
+    maxY = Math.max(maxY, box.y + box.height);
+  }
+  if (!Number.isFinite(minX) || maxX <= minX || maxY <= minY) return;
+  const width = maxX - minX;
+  const height = maxY - minY;
+  // The drawing fills 87.5% of the canvas on its longer side.
+  const scale = 1 / 0.875;
+  svg.setAttribute("viewBox", [
+    minX - width * (scale - 1) / 2,
+    minY - height * (scale - 1) / 2,
+    width * scale,
+    height * scale,
+  ].join(" "));
+}
+
+function updatePageLabel() {
+  const options = [...pageSelect.options];
+  const index = options.findIndex(option => option.value === pageSelect.value);
+  const pageText = index >= 0 ? `${options[index].textContent} ${index + 1}/${options.length}` : "";
+  const modeText = modeNames[activeMode] || "";
+  const caption = document.querySelector("#mode-caption");
+  if (caption) caption.textContent = pageText && modeText ? `${pageText} · ${modeText}` : pageText || modeText;
+  const canvasPage = document.querySelector("#canvas-page");
+  if (canvasPage) canvasPage.textContent = pageText;
+}
+
+function stepPage(delta) {
+  const options = [...pageSelect.options];
+  if (!options.length || pageSelect.disabled) return;
+  const index = options.findIndex(option => option.value === pageSelect.value);
+  const next = (index + delta + options.length) % options.length;
+  pageSelect.value = options[next].value;
+  pageSelect.dispatchEvent(new Event("change"));
 }
 
 init();
