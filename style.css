@@ -140,12 +140,7 @@ p { margin: 0; }
 .textlink { color: inherit; font-weight: 650; }
 
 .hero { padding: 1.4rem 0 0.4rem; }
-.zh {
-  margin: 0.7rem 0 0;
-  font-size: 1.25rem;
-  letter-spacing: 0.04em;
-}
-.subtitle { margin-top: 0.75rem; font-size: 1.05rem; }
+.subtitle { margin-top: 0.85rem; font-size: 1.05rem; }
 .hero-buy { margin-top: 1.15rem; }
 .price {
   display: flex;
