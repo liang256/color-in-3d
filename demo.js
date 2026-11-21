@@ -391,4 +391,124 @@ function stepPage(delta) {
   pageSelect.dispatchEvent(new Event("change"));
 }
 
+const shareLink = "https://liang256.github.io/color-in-3d/";
+let toastTimer = 0;
+
+function pageIsZh() {
+  return document.documentElement.lang.toLowerCase().startsWith("zh");
+}
+
+function showToast(message) {
+  const toast = document.querySelector("#toast");
+  toast.textContent = message;
+  toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.hidden = true; }, 3200);
+}
+
+function downloadBlob(blob, name) {
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.download = name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+async function renderSharePng() {
+  const svg = stage.querySelector("svg");
+  if (!svg) return null;
+  const clone = svg.cloneNode(true);
+  for (const face of clone.querySelectorAll("[data-face-id]")) {
+    face.removeAttribute("tabindex");
+    face.removeAttribute("role");
+    face.removeAttribute("aria-label");
+    face.setAttribute("stroke", "none");
+    face.style.outline = "none";
+  }
+  clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  const viewBox = (clone.getAttribute("viewBox") || "0 0 1 1").trim().split(/[\s,]+/).map(Number);
+  const vbW = viewBox[2] || 1;
+  const vbH = viewBox[3] || 1;
+  const width = 1080;
+  const height = 1350;
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#FFF6E8";
+  ctx.fillRect(0, 0, width, height);
+
+  const footer = 200;
+  const pad = 72;
+  const areaW = width - pad * 2;
+  const areaH = height - footer - pad;
+  const drawScale = Math.min(areaW / vbW, areaH / vbH);
+  const drawW = vbW * drawScale;
+  const drawH = vbH * drawScale;
+  const drawX = (width - drawW) / 2;
+  const drawY = pad + (areaH - drawH) / 2;
+  clone.setAttribute("width", String(Math.ceil(drawW)));
+  clone.setAttribute("height", String(Math.ceil(drawH)));
+  const xml = new XMLSerializer().serializeToString(clone);
+  const svgBlob = new Blob([xml], { type: "image/svg+xml;charset=utf-8" });
+  const objectUrl = URL.createObjectURL(svgBlob);
+  try {
+    const image = new Image();
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = reject;
+      image.src = objectUrl;
+    });
+    ctx.drawImage(image, drawX, drawY, drawW, drawH);
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+
+  try { await document.fonts.load("700 36px Inter"); } catch { /* system font is fine */ }
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#161817";
+  ctx.font = "700 34px Inter, sans-serif";
+  ctx.fillText("Color in 3D Together", width / 2, height - 122);
+  ctx.fillStyle = "#55483e";
+  ctx.font = "700 22px Inter, sans-serif";
+  ctx.fillText("liang256.github.io/color-in-3d", width / 2, height - 84);
+  const dots = ["#F94C3E", "#00A99A", "#2A56E8", "#FFC400"];
+  const dot = 16;
+  const gap = 14;
+  let dotX = (width - (dots.length * dot + (dots.length - 1) * gap)) / 2;
+  for (const color of dots) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(dotX + dot / 2, height - 48, dot / 2, 0, Math.PI * 2);
+    ctx.fill();
+    dotX += dot + gap;
+  }
+  return new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+}
+
+async function shareArtwork() {
+  const png = await renderSharePng();
+  if (!png) return;
+  const file = new File([png], "color-in-3d-together.png", { type: "image/png" });
+  const text = pageIsZh() ? "分享我的作品 · Color in 3D Together" : "Color in 3D Together";
+  let canShare = false;
+  try {
+    canShare = typeof navigator.canShare === "function" && navigator.canShare({ files: [file] });
+  } catch { /* this browser cannot share files */ }
+  if (canShare) {
+    try {
+      await navigator.share({ files: [file], text, url: shareLink });
+      return;
+    } catch (error) {
+      if (error && error.name === "AbortError") return;
+    }
+  }
+  downloadBlob(png, file.name);
+  try { await navigator.clipboard.writeText(shareLink); } catch { /* download still happened */ }
+  showToast(pageIsZh() ? "已儲存圖片，並已複製連結。" : "Image saved and link copied.");
+}
+
+document.querySelector("#share").addEventListener("click", () => { shareArtwork(); });
+
 init();

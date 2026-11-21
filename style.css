@@ -126,6 +126,45 @@ p { margin: 0; }
   border: 1px solid var(--ink);
 }
 .buy:hover { background: var(--accent); border-color: var(--accent); }
+.share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff6e8;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  grid-column: 1;
+}
+.share svg { width: 20px; height: 20px; flex: none; }
+.share:hover { background: #14268a; }
+.share-zh { display: none; }
+html[lang|="zh"] .share-en { display: none; }
+html[lang|="zh"] .share-zh { display: inline; }
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  z-index: 6;
+  transform: translateX(-50%);
+  max-width: min(420px, calc(100% - 32px));
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff6e8;
+  font-size: 0.92rem;
+  text-align: center;
+}
 .buy-compact {
   min-height: 40px;
   padding: 8px 14px;
@@ -455,6 +494,10 @@ figcaption, .sheet figcaption {
     gap: 6px;
     flex: none;
     width: 100%;
+  }
+  #try .share {
+    width: 100%;
+    margin-top: 2px;
   }
   .play-row {
     display: flex;
