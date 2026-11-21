@@ -73,6 +73,7 @@ const modes = {
       if (!face || !stage.contains(face)) return;
       faceColors.set(face.dataset.faceId, selectedColor);
       renderColors();
+      face.blur();
     },
   },
 };
