@@ -363,6 +363,8 @@ select { width: 100%; }
 .swatch-add:has(input:disabled) { opacity: 0.4; }
 
 .sheet { margin: 0 auto; width: min(100%, 600px, 63vh); }
+.stage-frame { position: relative; width: 100%; }
+.canvas-page { display: none; }
 figcaption, .sheet figcaption {
   display: flex;
   justify-content: space-between;
@@ -410,7 +412,7 @@ figcaption, .sheet figcaption {
   }
   #try .controls { display: none; }
   #try .sheet {
-    width: min(100%, calc(100svh - var(--header-h) - 168px));
+    width: min(100%, calc(100svh - var(--header-h) - 130px));
     margin: 0 auto;
     order: 0;
   }
@@ -419,19 +421,42 @@ figcaption, .sheet figcaption {
     aspect-ratio: 1;
     box-shadow: none;
   }
+  #try:has(.is-tap) .canvas-page {
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 1;
+    max-width: calc(100% - 16px);
+    margin: 0;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #ffffffd9;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
   #try .mobile-play {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 6px;
     flex: none;
+    width: 100%;
   }
   .play-row {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-    gap: 6px;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 3px;
+    width: 100%;
   }
   .pager {
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
     border: 1px solid var(--rule);
@@ -442,31 +467,11 @@ figcaption, .sheet figcaption {
     padding: 0;
   }
   .pager:disabled { opacity: 0.4; }
-  .page-label {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap: 6px;
-    min-width: 0;
-    margin: 0;
-    font-size: 0.82rem;
-    line-height: 1.2;
-  }
-  #page-label-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 0;
-  }
-  #page-label-count {
-    flex: none;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
   .mode-icons {
     display: flex;
     justify-content: center;
-    gap: 6px;
+    align-items: center;
+    gap: 3px;
   }
   .mode-icons button {
     flex: 0 0 44px;
@@ -487,17 +492,21 @@ figcaption, .sheet figcaption {
   }
   .mode-icons svg { width: 26px; height: 26px; display: block; }
   .play-meta {
-    min-height: 44px;
+    min-height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
   .mode-caption {
     margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.2;
+    width: 100%;
+    font-size: 0.82rem;
+    line-height: 1.3;
     text-align: center;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .mobile-swatches { display: none; }
   .mobile-play.is-tap .mode-caption { display: none; }

@@ -120,8 +120,8 @@ function setMode(name, initialFills = "") {
     input.disabled = !interactive;
   }
   document.querySelector("#mode-help").textContent = mode.help;
-  document.querySelector("#mode-caption").textContent = modeNames[name];
   mobilePlay.classList.toggle("is-tap", name === "tap");
+  updatePageLabel();
   shuffle.hidden = name !== "random";
   renderColors();
 }
@@ -299,6 +299,7 @@ async function loadPage(page, initialFills) {
     if (svg.localName !== "svg") throw new Error(`Invalid artwork in ${page.svg}`);
     svg.setAttribute("aria-label", page.title);
     stage.replaceChildren(svg);
+    fitArtwork(svg);
     faces = [...svg.querySelectorAll("[data-face-id]")];
     document.querySelector("#page-title").textContent = page.title;
     document.querySelector("#face-count").textContent = `${faces.length} faces`;
@@ -336,16 +337,42 @@ async function init() {
   }
 }
 
+function fitArtwork(svg) {
+  const nodes = [...svg.querySelectorAll("#fills, #line-art, #seams")];
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const node of nodes) {
+    const box = node.getBBox();
+    if (!box.width && !box.height) continue;
+    minX = Math.min(minX, box.x);
+    minY = Math.min(minY, box.y);
+    maxX = Math.max(maxX, box.x + box.width);
+    maxY = Math.max(maxY, box.y + box.height);
+  }
+  if (!Number.isFinite(minX) || maxX <= minX || maxY <= minY) return;
+  const width = maxX - minX;
+  const height = maxY - minY;
+  // The drawing fills 87.5% of the canvas on its longer side.
+  const scale = 1 / 0.875;
+  svg.setAttribute("viewBox", [
+    minX - width * (scale - 1) / 2,
+    minY - height * (scale - 1) / 2,
+    width * scale,
+    height * scale,
+  ].join(" "));
+}
+
 function updatePageLabel() {
   const options = [...pageSelect.options];
   const index = options.findIndex(option => option.value === pageSelect.value);
-  const name = document.querySelector("#page-label-name");
-  const count = document.querySelector("#page-label-count");
-  if (!name || !count) return;
-  name.textContent = index >= 0 ? options[index].textContent : "";
-  count.textContent = index >= 0 ? `${index + 1}/${options.length}` : "";
-  const label = document.querySelector("#page-label");
-  if (label && index >= 0) label.title = `${options[index].textContent} ${index + 1}/${options.length}`;
+  const pageText = index >= 0 ? `${options[index].textContent} ${index + 1}/${options.length}` : "";
+  const modeText = modeNames[activeMode] || "";
+  const caption = document.querySelector("#mode-caption");
+  if (caption) caption.textContent = pageText && modeText ? `${pageText} · ${modeText}` : pageText || modeText;
+  const canvasPage = document.querySelector("#canvas-page");
+  if (canvasPage) canvasPage.textContent = pageText;
 }
 
 function stepPage(delta) {

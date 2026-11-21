@@ -116,20 +116,17 @@
 
           <figure class="sheet">
             <figcaption><span id="page-title"></span><span id="face-count"></span></figcaption>
-            <div id="stage" aria-label="Coloring artwork"></div>
+            <div class="stage-frame">
+              <div id="stage" aria-label="Coloring artwork"></div>
+              <p class="canvas-page" id="canvas-page"></p>
+            </div>
             <p id="status" role="status">Loading artwork…</p>
           </figure>
 
           <div class="mobile-play" id="mobile-play">
             <div class="play-row">
               <button type="button" class="pager" id="page-prev" aria-label="Previous page" title="Previous page" disabled>‹</button>
-              <p class="page-label" id="page-label" aria-live="polite">
-                <span id="page-label-name"></span>
-                <span id="page-label-count"></span>
-              </p>
-              <button type="button" class="pager" id="page-next" aria-label="Next page" title="Next page" disabled>›</button>
-            </div>
-            <div class="mode-icons" role="group" aria-label="View mode">
+              <div class="mode-icons" role="group" aria-label="View mode">
               <button type="button" data-mode="one-side" aria-pressed="true" aria-label="One side only" title="One side only">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 3.2 20.5 8 12 12.8 3.5 8 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
@@ -171,6 +168,8 @@
                   <path fill="currentColor" d="M20.3 15.2c0 0-1.7 2.6-1.3 4 .35 1.15 1.7 1.45 2.45.55.85-1 .85-2.7-.15-4.15-.4-.55-1-.7-1-.4z"/>
                 </svg>
               </button>
+              </div>
+              <button type="button" class="pager" id="page-next" aria-label="Next page" title="Next page" disabled>›</button>
             </div>
             <div class="play-meta">
               <p class="mode-caption" id="mode-caption" aria-hidden="true"></p>
